@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { mdiArrowLeft } from '@mdi/js';
+import MyComponent4 from './get.jsx';
+
 
 function App() {
   const [winners, setWinners] = useState([]);
@@ -171,6 +173,7 @@ function App() {
       </div>
     
       <Switch/>
+      <MyComponent4/>
     </div>
   );
 }
