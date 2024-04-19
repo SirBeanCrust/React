@@ -73,8 +73,8 @@ export default function TicTacToe() {
     const [history, setHistory] = useState([Array(9).fill(null)]);
     const [currentMove, setCurrentMove] = useState(0);
     const [ascendingOrder, setAscendingOrder] = useState(true);
-    const boardWidth = 9;
-    const boardHeight = 6;
+    const boardWidth = 12;
+    const boardHeight = 12;
     const seqLenght = 3;
 
     const xTurn = currentMove % 2 === 0;
@@ -157,7 +157,8 @@ function calculateWinner(squares, boardWidth, boardHeight, seqLenght) {
     console.log("Board:", squares)
     
     let lines = [];
-    
+    //Difines possible winning combinations and adds them to lines[]:
+
     //Horizontal Lines
     for (let row = 0; row < boardHeight; row++) {
         lines.push(Array.from({ length: boardWidth }, (_, col) => squares[row * boardWidth + col]));
@@ -204,6 +205,7 @@ function calculateWinner(squares, boardWidth, boardHeight, seqLenght) {
     //console.log(lines)
 
 	//Check for winner
+    //Runs trough lines[] to check if the board contains any winning combinations
     for (let i = 0; i < lines.length  ; i++) {
     const line = lines[i]
     //console.log(line)
