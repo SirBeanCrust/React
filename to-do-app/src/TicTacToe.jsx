@@ -79,7 +79,12 @@ export default function TicTacToe() {
 
     const xTurn = currentMove % 2 === 0;
     const currentSquares = history[currentMove];
-    const winner = calculateWinner(currentSquares, boardWidth, boardHeight, seqLenght);
+    const winCombo = calculateWinner(currentSquares, boardWidth, boardHeight, seqLenght);
+    const [winner, setWinner] = useState(null);
+    if (winCombo) {
+        setWinner(winCombo.winner)
+    }
+    
     const draw = caluculateDraw(currentMove, winner, boardWidth, boardHeight);
 
 
@@ -196,22 +201,28 @@ function calculateWinner(squares, boardWidth, boardHeight, seqLenght) {
         }
         lines.push(line);
     }
-    console.log(lines)
+    //console.log(lines)
 
 	//Check for winner
     for (let i = 0; i < lines.length  ; i++) {
     const line = lines[i]
-    console.log(line)
+    //console.log(line)
     
     for (let j = seqLenght - 1; j < line.length  ; j++) {
-        if (line[j] !== null && line[j] == line[j - 1] && line[j] == line[j - 2] ) {
-        if (line[j]) {
-            return line[j]};
+        if (line[j] !== null){
+            continue;
+        }
+        if (line[j] == line[j - 1]){
+            continue;
+        }
+        if (line[j] == line[j - 2]){
+            return {winner:line[j], square1:j, square2:j - 1, square3:j - 2};
         }
     }
     }
     return null;
 }
+//return {winner:line[j], square1:j, square2:j - 1, square3:j - 2};
 function caluculateDraw(currentMove, winner, boardWidth, boardHeight){
     let draw = null;
     if (currentMove + 1 > boardWidth * boardHeight  && !winner) {
